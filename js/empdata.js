@@ -55,17 +55,14 @@ class EmployeePayRoll {
     return this._startDate;
   }
   set startDate(startDate) {
-    let now = new Date();
-    if (startDate > now) throw "Start Date is a Future Date!";
-    let diff = Math.abs(now.getTime() - startDate.getTime());
-    if (diff / (1000 * 60 * 60 * 24) > 30)
-      throw "Start Date is beyond 30 Days!";
     this._startDate = startDate;
   }
 
   toString() {
-    const options = { year: "numeric", month: "short", day: "numeric" };
-    const empDate = !this.startDate ? "undefined" : this.startDate;
+    const options = { year: "numeric", month: "String", day: "numeric" };
+    const empDate = !this.startDate
+      ? "undefined"
+      : this.startDate.toLocalDateString("_en-us", options);
     return (
       "id=" +
       this.id +
