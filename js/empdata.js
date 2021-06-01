@@ -1,4 +1,5 @@
-class EmployeePayrollData {
+class EmployeePayRoll {
+  // getter and setter method
   get id() {
     return this._id;
   }
@@ -10,14 +11,16 @@ class EmployeePayrollData {
     return this._name;
   }
   set name(name) {
-    this._name = name;
+    let nameRegex = RegExp("^[A-Z]{1}[a-zA-Z\\s]{2,}$");
+    if (nameRegex.test(name)) this._name = name;
+    else throw "Name is Incorrect!";
   }
 
-  get salary() {
-    return this._salary;
+  get profilePic() {
+    return this._profilePic;
   }
-  set salary(salary) {
-    this._salary = salary;
+  set profilePic(profilePic) {
+    this._profilePic = profilePic;
   }
 
   get gender() {
@@ -27,67 +30,59 @@ class EmployeePayrollData {
     this._gender = gender;
   }
 
+  get department() {
+    return this._department;
+  }
+  set department(department) {
+    this._department = department;
+  }
+
+  get salary() {
+    return this._salary;
+  }
+  set salary(salary) {
+    this._salary = salary;
+  }
+
+  get note() {
+    return this._note;
+  }
+  set note(note) {
+    this._note = note;
+  }
+
   get startDate() {
     return this._startDate;
   }
   set startDate(startDate) {
+    let now = new Date();
+    if (startDate > now) throw "Start Date is a Future Date!";
+    let diff = Math.abs(now.getTime() - startDate.getTime());
+    if (diff / (1000 * 60 * 60 * 24) > 30)
+      throw "Start Date is beyond 30 Days!";
     this._startDate = startDate;
   }
 
-  get departments() {
-    return this._departments;
-  }
-  set departments(departments) {
-    this._departments = departments;
-  }
-
   toString() {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    const employeeDate = !this.startDate
-      ? "undefined"
-      : this.startDate.toLocaleDateString("en-US", options);
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    const empDate = !this.startDate ? "undefined" : this.startDate;
     return (
-      "[ id: " +
+      "id=" +
       this.id +
-      ", name: " +
+      ", name='" +
       this.name +
-      ", salary: " +
-      this.salary +
-      ", gender: " +
+      ", gender='" +
       this.gender +
-      ", startDate: " +
-      employeeDate +
-      ", departments: " +
-      this.departments +
-      " ]" +
-      "\n"
+      ", profilePic='" +
+      this.profilePic +
+      ", department=" +
+      this.department +
+      ", salary=" +
+      this.salary +
+      ", startDate=" +
+      empDate +
+      ", note=" +
+      this.note
     );
   }
-}
-
-function save() {
-  let employeePayrollData = new EmployeePayrollData();
-  employeePayrollData.name = document.querySelector("#name").value;
-
-  employeePayrollData.gender = document.querySelector("#male").checked
-    ? "M"
-    : "F";
-
-  employeePayrollData.salary = document.querySelector("#salary").value;
-
-  dateString =
-    document.querySelector("#month").value +
-    " " +
-    document.querySelector("#day").value +
-    " " +
-    document.querySelector("#year").value;
-  employeePayrollData.startDate = new Date(dateString);
-
-  let departmentsArray = [];
-  document.querySelectorAll("[name=department]").forEach((input) => {
-    if (input.checked) departmentsArray.push(input.value);
-  });
-  employeePayrollData.departments = departmentsArray;
-
-  alert("Employee Added Successfully!\n" + employeePayrollData.toString());
 }
