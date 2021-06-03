@@ -30,9 +30,53 @@
           Employee Details
           <div class="emp-count">10</div>
         </div>
-        <a href="../pages/empdata.html" class="add-button"
+        <a href="../pages/EmployeePayrollApp.html" class="add-button"
           ><img src="../assets/icons/add-24px.svg" alt="" />Add User</a
         >
+        <div class="table-main">
+          <table id="display" class="table">
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Department</th>
+              <th>Salary</th>
+              <th>Start Date</th>
+              <th>Actions</th>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  class="profile"
+                  alt=""
+                  src="../assets/profile-images/Ellipse -1.png"
+                />
+              </td>
+              <td>Shruti Verma</td>
+              <td>Female</td>
+              <td>
+                <div class="dept-label">Engineer</div>
+                <div class="dept-label">Finance</div>
+              </td>
+              <td>700000</td>
+              <td>07 April 2018</td>
+              <td>
+                <img
+                  id="1"
+                  onclick="remove(this)"
+                  alt="delete"
+                  src="../assets/icons/delete-black-18dp.svg"
+                />
+                <img
+                  id="1"
+                  onclick="update(this)"
+                  alt="edit"
+                  src="../assets/icons/create-black-18dp.svg"
+                />
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </body>
